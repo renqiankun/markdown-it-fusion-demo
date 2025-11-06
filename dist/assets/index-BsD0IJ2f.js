@@ -78,9 +78,6 @@ var S3=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports);var nke=S3((Vn,zn
  { "message": "Hello" } 
 </my-component>
 
-  \`\`\`html
-    <my-component>console.log('hello');</my-component>
-\`\`\`
 
  前置文本 前置文本
   `;console.log(s.length);for(var i of s.split(""))await ZSe(30),r.value[0].content+=i};let l=P(!0);return setTimeout(()=>{},1e3*5),t({init:a}),(s,i)=>d(l)?(y(),_e(YSe,{key:0,modelValue:d(r),"onUpdate:modelValue":i[0]||(i[0]=u=>kt(r)?r.value=u:r=u)},null,8,["modelValue"])):he("",!0)}}),JSe=A({__name:"App",setup(e){return(t,n)=>(y(),_e(XSe))}}),QSe=[aa,Ibe,b6e,Gbe,Bye,j5e,W5e,U5e,v3e,m3e,je,Sr,Nwe,Dwe,ji,A9e,Tbe,il,sa,Pwe,oxe,axe,K_e,iSe,MSe,LSe,q8e,X8e,J8e,Mo,nSe,gbe,l7e,P9e,n5e,fwe,M6,MCe,E6,Cf,K9e,Fxe,Qi,mr,e7e],eke=e=>{QSe.forEach(t=>{e.use(t)});for(const[t,n]of Object.entries(pE))e.component(t,n)},tke={install:eke},Fc=n4(JSe);Fc.use(X_());Fc.use(tke);Fc.mount("#app");window.__APP__=Fc});export default nke();
