@@ -30,7 +30,7 @@
     "lodash-es": "^4.17.21",
     "markdown-it-custom-component": "^0.0.5",
     "markdown-it-link-attributes": "^4.0.1",
-    "markdown-it-vue-component": "^0.0.8",
+    "markdown-it-vue-component": "^0.0.10",
     "md-editor-v3": "^5.8.4",
     "mermaid": "^11.10.1",
     "minimatch": "^5.1.1",

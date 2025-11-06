@@ -6,9 +6,10 @@
 > A Vue 3 plugin based on Markdown-it, which allows rendering Vue components inside Markdown. Supports streaming rendering and custom placeholders.
 
 
-#### [github](https://github.com/renqiankun/markdown-it-custom-component-demo)
-#### [demo](https://renqiankun.github.io/markdown-it-custom-component-demo/dist/)
+#### [github](https://github.com/renqiankun/markdown-it-vue-component-demo)
+#### [demo](https://renqiankun.github.io/markdown-it-vue-component-demo/dist/)
 ---
+
 
 ## Features
 
