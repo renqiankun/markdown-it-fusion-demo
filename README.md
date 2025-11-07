@@ -37,7 +37,7 @@ yarn add markdown-it-vue-component
 ## 使用方法
 
 ```ts
-import { ref, watch } from 'vue'
+import { ref, watch ,shallowRef} from 'vue'
 import MarkdownIt from 'markdown-it'
 import customComponentPlugin , { type MDVueComponentOptions ,type SegmentsResultItem} from 'markdown-it-vue-component'
 
@@ -52,7 +52,7 @@ md.use(customComponentPlugin, {
   placeholderClass: 'custom-placeholder',
   components: {
     'my-component': {
-      component: MyComponent,
+      component: shallowRef(MyComponent),
       renderIntermediate: false,
       propsUseJson: true,
       multipleProps: true,
@@ -64,7 +64,7 @@ md.use(customComponentPlugin, {
 // 极简配置
 md.use(customComponentPlugin, {
   components: {
-    'my-component': { component: MyComponent } 
+    'my-component': { component: shallowRef(MyComponent) } 
   }
 })
 
