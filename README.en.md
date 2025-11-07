@@ -13,11 +13,16 @@
 
 ## Features
 
-- Insert Vue components inside Markdown
-- Pass component data as JSON
-- Supports placeholders and loading state
-- Retrieve rendered HTML and component segments (`getSegments`)
-- A plugin built on top of Markdown-it
+- **Embed Anything**: Seamlessly insert any custom Vue component directly into your Markdown.
+- **JSON-Powered Props**: Easily pass data to your components using clean JSON.
+- **Smooth Loading States**: Display elegant placeholders and loading indicators while data is streaming.
+- **Segmented Output**: Get a structured list of HTML and component segments for advanced rendering control.
+- **Plays Well with Others**: A pure `markdown-it` plugin, ensuring full compatibility with the existing ecosystem.
+- **Easily Adaptable**: Simple to modify for use with other `markdown-it` based component libraries.
+- **Vue-Native Performance**: Leverages Vue's native diffing for highly efficient DOM updates.
+- **Flexible HTML Mode**: Works flawlessly with or without `markdown-it`'s HTML mode enabled.
+- **Smart Caching**: Boosts performance and stability by caching components and preventing unnecessary prop updates after data is fully loaded.
+
 
 ---
 

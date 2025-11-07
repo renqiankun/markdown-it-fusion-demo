@@ -38,10 +38,11 @@ const emits = defineEmits(['click'])
   height: 32px;
   cursor: pointer;
   border-radius: 50%;
-  background-color: var(--systemThemeColor);
+  background-color: var(--el-color-primary);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
   &.disabled {
     background-color: rgb(0 168 255 / 90%);;
     cursor: not-allowed;

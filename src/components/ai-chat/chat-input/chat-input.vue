@@ -8,7 +8,7 @@
           placeholder=""
           :autosize="{
             minRows: 1,
-            maxRows: 12
+            maxRows: 3
           }"
           resize="none"
           class="chat-input"
@@ -133,7 +133,7 @@ const emits = defineEmits(['update:modelValue', 'update:model', 'submit', 'stopR
   //   inset rgba(255, 255, 255, 0.1) 0px -3px 5px -3px,
   //   inset rgba(255, 255, 255, 0.1) 0px -3px 6px -4px;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   position: relative;
   z-index: 99;
 }

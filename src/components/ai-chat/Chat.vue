@@ -14,7 +14,6 @@
           v-model="chatMessage"
           v-model:model="model"
           @submit="submitHand"
-          @stop-recive="stopReciveHand"
         ></chatInput>
       </div>
     </div>
@@ -56,29 +55,22 @@ const submitHand = async () => {
   chatMessage.value = ''
 }
 
-/**
- * 主动结束接收数据
- */
-const stopReciveHand = () => {
-}
-
-
 onMounted(() => {
 })
-onUnmounted(() => {
-  stopReciveHand()
-})
-
 </script>
 
 <style lang="scss" scoped>
 $chat-width: 100%;
 .chat-wrap {
   width: 100%;
-  // height: 100%;
-  //height: calc(100vh - 350px);
-  max-height: 500px;
+  height: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  height: calc(100vh - 40px);
   display: flex;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 .right-chat-box {
   flex: 1;
