@@ -51,6 +51,7 @@ md.use(customComponentPlugin, {
   placeholderClass: 'custom-placeholder',
   components: {
     'my-component': {
+      // 此字段内部无任何处理，原样返回，可使用字符串，渲染时自己匹配
       component: shallowRef(MyComponent),
       renderIntermediate: false,
       propsUseJson: true,
