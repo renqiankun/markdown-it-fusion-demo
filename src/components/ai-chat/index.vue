@@ -36,7 +36,9 @@ const init = async () => {
 
  <my-card tag='a' isBlock > { "type": "Hello" } </my-card>
 
-\`\`\`markdown <my-card tag='b'/> \`\`\`
+\`\`\`markdown 
+<my-card tag='b'/> 
+\`\`\`
  <my-card tag='b'/> 
 
 
