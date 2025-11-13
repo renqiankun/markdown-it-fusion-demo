@@ -11,7 +11,6 @@
 ---
 
 
-
 ## Features
 
 * **Powerful Componentization**
@@ -88,7 +87,7 @@ const renderHtml = (markdownText: string) => {
 }
 
 onMounted(() => {
-  renderHtml('# Hello Markdown <my-component> { "type": "Hello" } </my-component> ')
+  renderHtml('# Hello Markdown')
 })
 ```
 
@@ -103,7 +102,11 @@ onMounted(() => {
       <!-- Regular HTML segment -->
       <div v-if="item.type === 'html'" v-html="item.content"></div>
       <!-- Vue component segment -->
-      <component v-if="item.type === 'component'" :is="item.component" v-bind="item.props" ></component>
+      <component
+        v-if="item.type === 'component'"
+        :is="item.component"
+        v-bind="item.props"
+      ></component>
     </template>
   </div>
 </template>
@@ -150,7 +153,11 @@ Each segment object has the following structure:
   id: string | number,
   content?: string,            // Content for HTML segment
   component?: any,             // Vue component
-  props?: { [key: string]: any ,_isComplete?: boolean}  // Props for the component
+  props?: {
+  [key: string]: any,
+   _attrs?: Record<string, any>,
+  _isComplete?: boolean
+  }
 }
 ```
 

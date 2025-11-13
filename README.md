@@ -2,12 +2,11 @@
 
 # markdown-it-vue-component
 
-> 一个基于 Markdown-it 的插件，用于在 Markdown 中渲染vue react 组件，支持流式渲染和自定义占位符。,c此为vue demo
- 
+> 一个基于 Markdown-it 的 Vue3 插件，用于在 Markdown 中渲染 Vue 组件，支持流式渲染和自定义占位符。
+
 #### [github](https://github.com/renqiankun/markdown-it-vue-component-demo)
 #### [demo](https://renqiankun.github.io/markdown-it-vue-component-demo/dist/)
 ---
-
 
 ## 功能特点
 
@@ -42,7 +41,7 @@ yarn add markdown-it-vue-component
 ## 使用方法
 
 ```ts
-import { ref, watch ,shallowRef} from 'vue'
+import { ref, watch ，shallowRef} from 'vue'
 import MarkdownIt from 'markdown-it'
 import customComponentPlugin , { type MDVueComponentOptions ,type SegmentsResultItem} from 'markdown-it-vue-component'
 
@@ -57,7 +56,6 @@ md.use(customComponentPlugin, {
   placeholderClass: 'custom-placeholder',
   components: {
     'my-component': {
-      // 此字段内部无任何处理，原样返回，可使用字符串，渲染时自己匹配
       component: shallowRef(MyComponent),
       renderIntermediate: false,
       propsUseJson: true,
@@ -83,7 +81,7 @@ const renderHtml = (markdownText: string) => {
 }
 
 onMounted(() => {
-  renderHtml('# Hello Markdown <my-component> { "type": "Hello" } </my-component> ')
+   renderHtml('# Hello Markdown <my-component> { "type": "Hello" } </my-component> ')
 })
 
 ```
@@ -99,7 +97,11 @@ onMounted(() => {
       <!-- 普通 HTML 段 -->
       <div v-if="item.type === 'html'" v-html="item.content"></div>
       <!-- Vue 组件段 -->
-      <component v-if="item.type === 'component'" :is="item.component" v-bind="item.props" ></component>
+      <component
+        v-if="item.type === 'component'"
+        :is="item.component"
+        v-bind="item.props"
+      ></component>
     </template>
   </div>
 </template>
@@ -146,7 +148,13 @@ const segments = md.getSegments(html)
   id: string | number,
   content?: string,            // html 段的内容
   component?: any,             // Vue 组件
-  props?: { [key: string]: any ,_isComplete?: boolean}// 组件的 props
+  props?: {
+    [key: string]: any,
+    /**标签上属性 */
+    _attrs?: Record<string, any>,
+    /**数据是否接收完成 */
+    _isComplete?: boolean
+  }
 }
 ```
 
