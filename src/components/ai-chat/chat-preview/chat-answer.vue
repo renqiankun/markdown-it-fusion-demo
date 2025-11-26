@@ -3,7 +3,7 @@
   <div class="user-info-wrap">
     <div class="user-head">A</div>
     <div class="user-question">
-      <template v-for="item in segments">
+      <template v-for="item in renderSegments">
         <div v-if="item.type == 'html'" :key="item.id" v-html="item.content"></div>
         <component
           v-if="item.type == 'component'"
@@ -18,11 +18,12 @@
 
 <script setup lang="ts">
 import markdownIt from 'markdown-it'
-import 'markdown-it-vue-component/style.css'
+import 'markdown-it-fusion/style.css'
 import customComponentPlugin, {
-  type MDVueComponentOptions,
+  useSegments,
+  type MDComponentOptions,
   type SegmentsResultItem
-} from 'markdown-it-vue-component'
+} from 'markdown-it-fusion'
 import { ref, shallowRef, watch } from 'vue'
 import myChart from '@/components/my-chart.vue'
 import myImg from '@/components/my-img.vue'
@@ -45,7 +46,7 @@ md.use(customComponentPlugin, {
       component: shallowRef(myCard),
       propsUseJson: true,
       multipleProps: true,
-    } as MDVueComponentOptions,
+    } as MDComponentOptions,
     'my-chart': {
       component: shallowRef(myChart),
       propsUseJson: true,
@@ -62,12 +63,13 @@ md.use(customComponentPlugin, {
   }
 })
 
-const segments = ref<Array<SegmentsResultItem>>([])
+const renderSegments = ref<Array<SegmentsResultItem>>([])
 const renderHtmlHand = (newVal: string) => {
   // 获取普通html
   let html = md.render(newVal)
   // 构造html与vue组件数据的list,用于后续遍历渲染
-  segments.value = (md as any).getSegments(html)
+ let {id,segments} = useSegments(html)
+ renderSegments.value = segments
 }
 
 watch(

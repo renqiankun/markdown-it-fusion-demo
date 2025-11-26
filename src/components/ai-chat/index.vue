@@ -108,7 +108,7 @@ const init = async () => {
     *   **性能缓存机制**：组件数据流完成后，组件 Props 将被智能锁定，杜绝组件不必要的重复渲染，确保高性能和组件状态稳定性。
 -
 *   **结构化输出**
-    *   **结构化输出 (getSegments)**：将渲染结果拆分为 **HTML 片段**和**待挂载的 组件**列表，不限制vue、react渲染
+    *   **结构化输出 (useSegments)**：将渲染结果拆分为 **HTML 片段**和**待挂载的 组件**列表，不限制vue、react渲染
 -
 *   **高兼容性**
     *   **基于 markdown-it 插件**：不影响 markdown-it 核心功能或其他插件的正常运作。
@@ -122,7 +122,7 @@ const init = async () => {
 
 -
 
-### 以上涉及到组件的配置：
+### 以上涉及到组件的配置 vue示例：
 
 \`\`\`markdown
 md.use(customComponentPlugin, {
