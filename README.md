@@ -11,6 +11,7 @@
 
 ---
 
+
 ## ✨ Key Features
 
 -   **🚀 Powerful Componentization**
@@ -47,7 +48,7 @@ yarn add markdown-it-fusion
 
 ## 🚀 Quick Start
 
-### 1. Initialize the Plugin
+### 1.1. Initialize the Plugin
 
 First, import and use the plugin with your `markdown-it` instance.
 
@@ -66,24 +67,6 @@ const MyComponent = { /* ... Component definition ... */ }
 
 const md = new MarkdownIt()
 
-// Full configuration example
-md.use(mdFusion, {
-  debug: false,
-  propsKey: '_data',
-  placeholderClass: 'custom-placeholder',
-  components: {
-    'my-component': {
-      // In Vue, it's recommended to use shallowRef(MyComponent)
-      component: MyComponent,
-      renderIntermediate: false,
-      propsUseJson: true,
-      multipleProps: true,
-      propsKey: '_data',
-      placeholderClass: 'custom-placeholder'
-    } as MDComponentOptions
-  }
-})
-
 // Minimal configuration example
 md.use(mdFusion, {
   components: {
@@ -91,6 +74,13 @@ md.use(mdFusion, {
   }
 })
 ```
+### 1.2. Use the Plugin
+```ts
+const html = md.render(' Markdown use <my-component>com</my-component>')
+// After obtaining the segments, traverse the segments in Vue or React to render HTML fragments or components.
+const { id, segments } = useSegments(html)
+```
+
 
 ### 2. Render in Vue
 
@@ -117,6 +107,7 @@ import MyComponent from './MyComponent.vue'
 // Instantiate markdown-it and use the plugin
 const md = MarkdownIt().use(mdFusion, {
   components: {
+    // Use shallowRef or a string (the component needs to be matched later by yourself)
     'my-component': { component: shallowRef(MyComponent) }
   }
 })
@@ -143,87 +134,8 @@ onBeforeUnmount(() => {
 ### 3. Render in React
 
 The logic is similar to Vue. Use `useMemo` for efficient rendering.
+The component cache logic keeps the references of props and _attrs passed to the component unchanged.
 
-#### 3.1 Define Your Custom Component (e.g., `MyComponent.jsx`)
-
-```jsx
-import React from 'react';
-
-// A standard React functional component
-function MyComponent({ type, _isComplete, _attrs }) {
-  console.log('Rendering MyComponent with type:', type);
-
-  return (
-    <div style={{ border: '1px solid blue', padding: '10px', margin: '10px 0' }}>
-      <h4>This is a custom React component</h4>
-      <p>Type: {type}</p>
-      <p>Is Stream Complete (_isComplete): {_isComplete ? 'Yes' : 'No'}</p>
-      <p>Attributes from Tag (_attrs): {JSON.stringify(_attrs)}</p>
-    </div>
-  );
-}
-
-// [Performance Key] Wrap your component with React.memo.
-// This prevents unnecessary re-renders when props haven't actually changed.
-export default React.memo(MyComponent);
-```
-
-#### 3.2 Create the Markdown Renderer Component (`MarkdownRenderer.jsx`)
-
-```jsx
-import React, { useEffect, useMemo } from 'react';
-import MarkdownIt from 'markdown-it';
-import mdFusion, { useSegments, destroy } from 'markdown-it-fusion';
-import MyComponent from './MyComponent'; // Import the memoized component
-
-// --- Initialize markdown-it ---
-// This part is usually done outside the component or with useMemo to avoid re-initialization
-const md = new MarkdownIt();
-md.use(mdFusion, {
-  components: {
-    'my-component': { component: MyComponent, propsUseJson: true }
-  }
-});
-// --------------------------
-
-function MarkdownRenderer({ markdownText }) {
-  // 1. Calculate segments. For performance, this is wrapped in useMemo.
-  const { id: instanceId, segments } = useMemo(() => {
-    const html = md.render(markdownText);
-    return useSegments(html);
-  }, [markdownText]);
-
-  // 2. Use useEffect to handle cache cleanup on unmount
-  useEffect(() => {
-    // Return a cleanup function
-    return () => {
-      if (instanceId) {
-        destroy(instanceId);
-      }
-    };
-  }, [instanceId]); // Only re-run if instanceId changes
-
-  // 3. Render the segments into React elements
-  return (
-    <div className="content">
-      {segments.map((item) => {
-        if (item.type === 'html') {
-          return (
-            <div key={item.id} dangerouslySetInnerHTML={{ __html: item.content }} />
-          );
-        }
-        if (item.type === 'component') {
-          const Component = item.component;
-          return <Component key={item.id} {...item.props} />;
-        }
-        return null;
-      })}
-    </div>
-  );
-}
-
-export default MarkdownRenderer;
-```
 
 ---
 
@@ -242,7 +154,7 @@ export default MarkdownRenderer;
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| **`component`** | `any` | **Required** | The component object to render (Vue/React). |
+| **`component`** | `any` | **Required** | The component object to render (Vue/React) or string |
 | `renderIntermediate` | `boolean` | `false` | Whether to render the component before the data stream is complete. |
 | `loadingText` | `string` | `'Loading...'` | Placeholder text to display when `renderIntermediate` is `false`. |
 | `propsUseJson` | `boolean` | `false` | Whether to attempt parsing tag content as JSON. |
@@ -304,7 +216,7 @@ destroy()
 -   **Memory Management**: In SPA environments like Vue or React, always call `destroy()` when the component unmounts to clean up the cache.
 
 ---
-
+![alt text](image.png)
 ## 📜 License
 
 MIT
